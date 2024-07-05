@@ -25,7 +25,7 @@ public class StringArrayUtils {
     /**
      * @param array array of String objects
      * @return last element in specified array
-     */ // TODO
+     */ // TODO_DONE
     public static String getLastElement(String[] array) {
         return array[array.length - 1];
     }
@@ -33,7 +33,7 @@ public class StringArrayUtils {
     /**
      * @param array array of String objects
      * @return second to last element in specified array
-     */ // TODO
+     */ // TODO_DONE
     public static String getSecondToLastElement(String[] array) {
         return array[array.length - 2];
     }
@@ -42,7 +42,7 @@ public class StringArrayUtils {
      * @param array array of String objects
      * @param value value to check array for
      * @return true if the array contains the specified `value`
-     */ // TODO
+     */ // TODO_DONE
     public static boolean contains(String[] array, String value) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals(value)) {
@@ -56,7 +56,7 @@ public class StringArrayUtils {
     /**
      * @param array of String objects
      * @return an array with identical contents in reverse order
-     */ // TODO
+     */ // TODO_DONE
     public static String[] reverse(String[] array) {
         // Create a new array to store the reversed elements
         String[] reverseArray = new String[array.length];
@@ -74,7 +74,7 @@ public class StringArrayUtils {
     /**
      * @param array array of String objects
      * @return true if the order of the array is the same backwards and forwards
-     */ // TODO
+     */ // TODO_DONE
     public static boolean isPalindromic(String[] array) {
         //create two counters that start from both ends
         int count = 0;
@@ -102,7 +102,7 @@ public class StringArrayUtils {
      * @param array array of String objects
      * @param value value to check array for
      * @return number of occurrences the specified `value` has occurred
-     */ // TODO
+     */ // TODO_DONE
     public static int getNumberOfOccurrences(String[] array, String value) {
         int numOfOcc = 0; //initialize #of occurances to zero
         for (int i = 0; i < array.length; i++) {// loop through the array
@@ -117,23 +117,42 @@ public class StringArrayUtils {
      * @param array         array of String objects
      * @param valueToRemove value to remove from array
      * @return array with identical contents excluding values of `value`
-     */ // TODO
+     */ // TODO_DONE
     public static String[] removeValue(String[] array, String valueToRemove) {
-//        int index = array.indexOf(valueToRemove);
-//        for (int i = 0; i < array.length; i++) {
-//            if (array[i].equals(valueToRemove)) {
-//                array[i] = "";
-//                break;
-//            }
-        return null;
-    }
-
+            String[] result = new String[array.length - 1];//Create new array "result" with one less than input array
+            int count = 0;//set the count to zero. will keep track of # of elements added to 'result' array
+            for (String i : array) { // same as int index = 0; index < array.length; index++
+                if (!i.equals(valueToRemove)) {//checks if current element i does not equal valueToBeRemoved
+                    result[count++] = i;//if it doesnt, increases count by one
+                }
+            }
+            return result;
+         }//only works if you know you are only removing one value
 
     /**
      * @param array array of chars
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
+//        String arr = array.toString();//convert string array to a string
+////        2)  Initialize two pointer i, j and empty string new_elements.
+//        int i = 0;
+//        int j = 0;
+//
+//        String newElements = "";
+////        3) Traverse the String Using j.
+//        while (j < arr.length()){//4) Compare the elements s[i] and s[j].
+//            if (arr.charAt(i) == arr.charAt(j)){
+//                j++; //if both elements are same skip .
+//            }else if (arr.charAt(j) != arr.charAt(i) || j == arr.length()-1){
+//                newElements += arr.charAt(i);//if both elements are not same then append into new_elements set and slide over the window.
+//
+//
+//                i = j;//traverse over the window
+//                j++;
+//            }
+//        }return null;
+//        return new String[]{newElements};
         return null;
     }
 
