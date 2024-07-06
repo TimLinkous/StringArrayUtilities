@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import java.nio.file.LinkPermission;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -95,7 +97,23 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+        String str = String.join(" " , array).toLowerCase();// Combine all strings into a single string separated by spaces
+
+        boolean[] check = new boolean[26];//Array to track if each letter is present
+        int index = 0;//variable to hold the index of the letter in the check array
+
+        for (int i = 0; i < str.length(); i++){// Iterate through each character in the combined string
+            if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){// Check if the character is a lowercase letter
+                index = str.charAt(i) - 'a';// Mark this letter as present
+            }
+            check[index] = true;
+        }
+        for (int i = 0; i < 26; i++){// Check if all letters from 'a' to 'z' are present in the check array
+            if (!check[i]){
+                return false;// If any letter is missing, return false
+            }
+        }
+        return true;
     }
 
     /**
@@ -119,50 +137,64 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO_DONE
     public static String[] removeValue(String[] array, String valueToRemove) {
-            String[] result = new String[array.length - 1];//Create new array "result" with one less than input array
-            int count = 0;//set the count to zero. will keep track of # of elements added to 'result' array
-            for (String i : array) { // same as int index = 0; index < array.length; index++
-                if (!i.equals(valueToRemove)) {//checks if current element i does not equal valueToBeRemoved
-                    result[count++] = i;//if it doesnt, increases count by one
-                }
+        String[] result = new String[array.length - 1];//Create new array "result" with one less than input array
+        int count = 0;//set the count to zero. will keep track of # of elements added to 'result' array
+        for (String i : array) { // same as int index = 0; index < array.length; index++
+            if (!i.equals(valueToRemove)) {//checks if current element i does not equal valueToBeRemoved
+                result[count++] = i;//if it doesnt, increases count by one
             }
-            return result;
-         }//only works if you know you are only removing one value
+        }
+        return result;
+    }//only works if you know you are only removing one value
 
     /**
      * @param array array of chars
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-//        String arr = array.toString();//convert string array to a string
-////        2)  Initialize two pointer i, j and empty string new_elements.
-//        int i = 0;
-//        int j = 0;
-//
-//        String newElements = "";
-////        3) Traverse the String Using j.
-//        while (j < arr.length()){//4) Compare the elements s[i] and s[j].
-//            if (arr.charAt(i) == arr.charAt(j)){
-//                j++; //if both elements are same skip .
-//            }else if (arr.charAt(j) != arr.charAt(i) || j == arr.length()-1){
-//                newElements += arr.charAt(i);//if both elements are not same then append into new_elements set and slide over the window.
-//
-//
-//                i = j;//traverse over the window
-//                j++;
-//            }
-//        }return null;
-//        return new String[]{newElements};
-        return null;
+        String[] result = new String[array.length]; // new array for result
+        int x = 0; // indexer for original array
+        for (int i = 0; i < array.length; i++) { // loop
+            result[x++] = array[i]; // add element to result
+            while (i < array.length - 1 && array[i].equals(array[i + 1])) { // skip duplicate
+                i++;
+            }
+        }
+        String[] finalArray = new String[x]; // new final array
+        System.arraycopy(result, 0, finalArray, 0, x); // copy to final array
+
+        return finalArray;
     }
+
 
     /**
      * @param array array of chars
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        ArrayList<String> outputArray = new ArrayList<>();
+        // change to string builder from basic string
+        // array initialized empty first element
+        StringBuilder tempConcat = new StringBuilder(array[0]);
+        for (int i = 1; i < array.length; i++) {
+            // while true loop, meaning while element 1 and next are equal, keep concat going
+            if (array[i].equals(array[i - 1])) {
+                // change + concat to append
+                tempConcat.append(array[i]);
+            } else {
+                // change tempConcat to string
+                outputArray.add(tempConcat.toString());
+                // reset the stringbuilder tempcat
+                tempConcat = new StringBuilder(array[i]);
+            }
+        }
+        // add the last concat tempConcat to the output array
+        outputArray.add(tempConcat.toString());
+        return outputArray.toArray(new String[0]);
     }
-
-
 }
+
+
+//
+//    }
+
